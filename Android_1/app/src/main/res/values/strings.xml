@@ -11,6 +11,8 @@
         <item>Sort Deepest</item>
         <item>Highest Magnitude</item>
         <item>Sort Highest Magnitude</item>
+        <item>Most East</item> <item>Most west</item>
+        <item>Most north</item> <item>Most south</item>
     </string-array>
     <string name="title">Earthquake Data (UK Only):\nStudentID: S1714096</string>
     <string name="locateall"> Locate All</string>

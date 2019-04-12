@@ -212,7 +212,97 @@ public class MainActivity extends AppCompatActivity  {
                             adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
 
                             lvRss.setAdapter(adapter);
-                        }else if(item.equalsIgnoreCase("No Sort"))
+                        }else if(item.equalsIgnoreCase("most East"))
+                        {
+                                double mostEast= 0.0;
+                                ArrayList<rssItem> east = new ArrayList<rssItem>();
+                                for(int i=0; i<items.size(); i++)
+                                {
+                                    if(mostEast < Double.parseDouble((items.get(i).getIgeoLong())))
+                                    {
+                                        mostEast = Double.parseDouble((items.get(i).getIgeoLong()));
+                                        if(east.size()>=1)
+                                        {
+                                            east.set(0,items.get(i));
+                                        }else{
+                                            east.add(items.get(i));
+                                        }
+                                    }
+
+
+                                }
+                            adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, east);
+
+                            lvRss.setAdapter(adapter);
+                        }else if(item.equalsIgnoreCase("most west"))
+                        {
+                            double mostWest= Double.parseDouble(items.get(0).getIgeoLong());
+                            ArrayList<rssItem> west = new ArrayList<rssItem>();
+                            for(int i=0; i<items.size(); i++)
+                            {
+                                if(mostWest > Double.parseDouble((items.get(i).getIgeoLong())))
+                                {
+                                    mostWest = Double.parseDouble((items.get(i).getIgeoLong()));
+                                    if(west.size()>=1)
+                                    {
+                                        west.set(0,items.get(i));
+                                    }else{
+                                        west.add(items.get(i));
+                                    }
+                                }
+
+
+                            }
+                            adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, west);
+
+                            lvRss.setAdapter(adapter);
+                        }else  if(item.equalsIgnoreCase("most south"))
+                        {
+                            double mostNorth= Double.parseDouble(items.get(0).getIgeoLat());
+                            ArrayList<rssItem> north = new ArrayList<rssItem>();
+                            for(int i=0; i<items.size(); i++)
+                            {
+                                if(mostNorth > Double.parseDouble((items.get(i).getIgeoLat())))
+                                {
+                                    mostNorth = Double.parseDouble((items.get(i).getIgeoLat()));
+                                    if(north.size()>=1)
+                                    {
+                                        north.set(0,items.get(i));
+                                    }else{
+                                        north.add(items.get(i));
+                                    }
+                                }
+
+
+                            }
+                            adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, north);
+
+                            lvRss.setAdapter(adapter);
+                        }else  if(item.equalsIgnoreCase("most north"))
+                        {
+                            double mostNorth= 0.0;
+                            ArrayList<rssItem> north = new ArrayList<rssItem>();
+                            for(int i=0; i<items.size(); i++)
+                            {
+                                if(mostNorth < Double.parseDouble((items.get(i).getIgeoLat())))
+                                {
+                                    mostNorth = Double.parseDouble((items.get(i).getIgeoLat()));
+                                    if(north.size()>=1)
+                                    {
+                                        north.set(0,items.get(i));
+                                    }else{
+                                        north.add(items.get(i));
+                                    }
+                                }
+
+
+                            }
+                            adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, north);
+
+                            lvRss.setAdapter(adapter);
+                        }
+
+                            if(item.equalsIgnoreCase("No Sort"))
                         {
                              adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
 
