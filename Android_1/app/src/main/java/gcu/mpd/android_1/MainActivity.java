@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity  {
     ArrayList<rssItem> items;
     rssItem item;
     EditText searchBarr;
-    rssItemAdapter adapter;
+    rssItemAdapter adapter, DeepestSort, Deepest, magSort, highMag;
+    Boolean sort;
     Spinner spinner;
     TextView locateAll;
 
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity  {
         lvRss = (ListView) findViewById(R.id.lvRss);
         searchBarr = (EditText) findViewById(R.id.searchBar);
         titles = new ArrayList<String>();
+
 
         geoLat = new ArrayList<String>();
         geoLong = new ArrayList<String>();
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity  {
                         //Get deppest
                         if(item.equalsIgnoreCase("Deepest")) {
                             int deepest = 0;
+                            sort=false;
                             String titleDeepest = "an Error";
                             ArrayList<rssItem> itm = new ArrayList<>();
                             for(int i=0; i<items.size();i++)
@@ -109,22 +112,25 @@ public class MainActivity extends AppCompatActivity  {
                                 if (newdpt > deepest)
                                 {
                                     deepest = newdpt;
-                                    if(itm.size()==1)
+                                    if(itm.size()>=1)
                                     {
                                         itm.set(0,items.get(i));
-                                    }else{itm.add(items.get(i));}
+                                    }else{
+                                        itm.add(items.get(i));
+                                    }
 
                                 }
 //                                Toast.makeText(MainActivity.this, newdpt, Toast.LENGTH_SHORT).show();
                             }
-                            rssItemAdapter ad = new rssItemAdapter(MainActivity.this, R.layout.listlayout, itm);
-                            lvRss.setAdapter(ad);
+
+                            adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, itm);
+                            lvRss.setAdapter(adapter);
 
                         }
                         //sort by deepest
                         else if(item.equalsIgnoreCase("Sort Deepest")) {
 //                            Toast.makeText(MainActivity.this, "lol", Toast.LENGTH_SHORT).show();
-
+                           sort=true;
                             rssItem temp ;
                             int depthI, depthX;
                             boolean sorted = false;
@@ -145,12 +151,13 @@ public class MainActivity extends AppCompatActivity  {
 
                                 }
                             }
-                            rssItemAdapter adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
+                            adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
                             lvRss.setAdapter(adapter);
                         }
                         //get highest magnitude
                         else if(item.equalsIgnoreCase("Highest Magnitude"))
                         {
+                            sort=false;
                             double strongest = 0;
                             String titleStrongest = "an Error";
                             ArrayList<rssItem> itm = new ArrayList<>();
@@ -161,19 +168,26 @@ public class MainActivity extends AppCompatActivity  {
                                 if ( newMag> strongest)
                                 {
                                     strongest = newMag;
-                                    if(itm.size()==1)
+
+                                    if(itm.size()>=1)
                                     {
                                         itm.set(0,items.get(i));
-                                    }else{itm.add(items.get(i));}
+                                    }else{
+                                        itm.add(items.get(i));
+                                    }
+
+
                                 }
 //                                Toast.makeText(MainActivity.this, newdpt, Toast.LENGTH_SHORT).show();
                             }
 
-                            rssItemAdapter adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, itm);
+
+                             adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, itm);
                             lvRss.setAdapter(adapter);
                         }//sort highest Magnitude
                         else if(item.equalsIgnoreCase("Sort Highest Magnitude"))
                         {
+                            sort=true;
                             sortedTitles = new ArrayList<String>();
                             rssItem temp ;
                             double magI, magX;
@@ -195,12 +209,12 @@ public class MainActivity extends AppCompatActivity  {
                                     }
                                 }
                             }
-                            rssItemAdapter adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
+                            adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
 
                             lvRss.setAdapter(adapter);
                         }else if(item.equalsIgnoreCase("No Sort"))
                         {
-                            rssItemAdapter adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
+                             adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, items);
 
                             lvRss.setAdapter(adapter);
                         }
@@ -230,7 +244,7 @@ public class MainActivity extends AppCompatActivity  {
                         temp.add(MainActivity.this.items.get(i));
 
                     }
-                    rssItemAdapter adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, temp);
+                    adapter = new rssItemAdapter(MainActivity.this, R.layout.listlayout, temp);
                     lvRss.setAdapter(adapter);
                 }
 
@@ -248,17 +262,22 @@ public class MainActivity extends AppCompatActivity  {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 
                 Intent intent = new Intent(MainActivity.this,Details.class);
-//                String itemName = (String) parent.getItemAtPosition(position);
-                String itemName = MainActivity.this.adapter.getItem(position).getItitle();
-                for(int i =0; i <items.size(); i++)
+//                Object item = parent.getItemAtPosition(position);
+                if(sort=true)
                 {
-                    if(itemName==items.get(i).getItitle())
-                    {
+                    String itemName = MainActivity.this.adapter.getItem(position).getItitle();
+                    Toast.makeText(MainActivity.this, itemName, Toast.LENGTH_LONG).show();
 
-                        intent.putExtra("item", items.get(i));
+                    for(int i =0; i <items.size(); i++)
+                    {
+                        if(itemName==items.get(i).getItitle())
+                        {
+                            intent.putExtra("item", items.get(i));
+                        }
                     }
+                    startActivity(intent);
                 }
-                startActivity(intent);
+
             }
         });
 
