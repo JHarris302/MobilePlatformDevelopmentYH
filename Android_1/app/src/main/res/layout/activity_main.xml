@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+        <!--@Name: Yakoob Hayat-->
+        <!--@StudentID: S1714096-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="7"
+    android:background="@android:color/holo_blue_light"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="5"
+        android:background="@android:color/black"
+        android:orientation="horizontal">
+
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:theme="?attr/actionBarTheme" />-->
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.5"
+            android:paddingLeft="10dp"
+            android:text="@string/title"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/locateAll"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:background="@android:color/black"
+            android:text="@string/locateall"
+            android:textAllCaps="false"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_weight="5"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@android:color/holo_blue_light"
+            android:text="@android:string/search_go" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="2"
+            android:background="@android:color/holo_blue_dark"
+            android:entries="@array/sorts" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+
+        <ListView
+            android:id="@+id/lvRss"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@android:color/holo_blue_light"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp" />
+    </LinearLayout>
+
+</LinearLayout>
